@@ -42,7 +42,7 @@ public class BookController {
     }
 
     @GetMapping
-    public Mono<BaseResponse<?>> retrieveAllBooks(@Valid FilterParam filterParam){
+    public Mono<BaseResponse<Object>> retrieveAllBooks(@Valid FilterParam filterParam){
 
         return bookService.retrieveAllBooks(filterParam)
                 .map(allBooksResponse -> new BaseResponse<>(true, HttpStatus.OK, Message.BOOK_RETRIEVED_SUCCESSFULLY, allBooksResponse));
@@ -50,7 +50,7 @@ public class BookController {
 
     @DeleteMapping("/{bookId}")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    public Mono<BaseResponse<?>> deleteBookById(@PathVariable Long bookId){
+    public Mono<BaseResponse<Object>> deleteBookById(@PathVariable Long bookId){
 
         return bookService.deleteBook(bookId)
                 .thenReturn(new BaseResponse<>(true, HttpStatus.OK, Message.BOOK_DELETED_SUCCESSFULLY));

@@ -51,6 +51,7 @@ public class BookRepositoryCustomImpl implements BookRepositoryCustom {
                         .map(total -> {
                             PageImpl<BookResponseDTO> bookResponseDTOS = new PageImpl<>(data, pageRequest, total);
                             return PageUtil.buildPaginatedResponse(bookResponseDTOS, pageRequest, total, "books");
-                        }));
+                        })
+                );
     }
 }
