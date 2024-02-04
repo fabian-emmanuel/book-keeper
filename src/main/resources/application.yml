@@ -1,0 +1,33 @@
+server:
+  port: 9000
+  error:
+    include-message: always
+
+spring:
+  webflux:
+    base-path: /api/v1
+  r2dbc:
+    url: ${R2DBC_DATASOURCE_URL:r2dbc:postgresql://postgres:5432/book-keeper-db}
+    username: ${DATASOURCE_USERNAME:postgres}
+    password: ${DATASOURCE_PASSWORD:postgres}
+  flyway:
+    url: ${JDBC_DATASOURCE_URL:jdbc:postgresql://postgres:5432/book-keeper-db}
+    user: ${DATASOURCE_USERNAME:postgres}
+    password: ${DATASOURCE_PASSWORD:postgres}
+    baseline-on-migrate: true
+
+jwt:
+  secret-key: ${JWT_SECRET:0471e7a05c369139ad7e5cceaad78dec35309e36e8c7c40efd1948901b1b69b6}
+  expiration: ${JWT_EXPIRATION_LENGTH:7200000}
+
+
+springdoc:
+  show-actuator: true
+
+
+api:
+  version: ${API_VERSION:1.0.0}
+  module-name: ${MODULE_NAME:Book-keeper Service}
+  app-name: ${APP_NAME:Book-keeper}
+  app-support-email: ${APP_SUPPORT_EMAIL:support@book-keeper.com}
+  app-website: ${APP_WEBSITE:https://www.book-keeper.com}

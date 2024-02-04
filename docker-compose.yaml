@@ -1,0 +1,35 @@
+services:
+  postgres:
+    container_name: book-keeper-db
+    image: 'postgres:latest'
+    environment:
+      - 'POSTGRES_DB=book-keeper-db'
+      - 'POSTGRES_PASSWORD=postgres'
+      - 'POSTGRES_USER=postgres'
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./data/db:/data/db
+    networks:
+      - shared-net
+
+
+  java:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "9000:9000"
+    container_name: book-keeper-app
+    image: 'book-keeper:latest'
+    links:
+      - postgres
+    depends_on:
+      - postgres
+    networks:
+      - shared-net
+
+networks:
+  shared-net:
+    driver: bridge
+
